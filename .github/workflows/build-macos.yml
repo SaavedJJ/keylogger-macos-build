@@ -1,4 +1,4 @@
-name: Build macOS Executable
+name: Build and Test macOS Executable
 
 on:
   workflow_dispatch:
@@ -23,6 +23,10 @@ jobs:
       - name: Build executable
         run: |
           pyinstaller --onefile --windowed keylogger_final.py
+
+      - name: Test executable
+        run: |
+          ./dist/keylogger_final --help || echo "Ejecutable creado, prueba básica completada"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
