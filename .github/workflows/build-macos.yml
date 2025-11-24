@@ -1,17 +1,17 @@
 name: Build macOS Executable
 
 on:
-  workflow_dispatch:  # Permite ejecutarlo manualmente
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -25,7 +25,7 @@ jobs:
           pyinstaller --onefile --windowed keylogger_final.py
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: macOS-executable
           path: dist/keylogger_final
