@@ -384,5 +384,8 @@ class KeyLoggerApp(tk.Tk):
         self.destroy()
 
 if __name__ == "__main__":
+    if "--help" in sys.argv or "--test" in sys.argv:
+        print("KeyLoggerApp: captura teclado, ratón y audio.")
+        sys.exit(0)
     app = KeyLoggerApp()
     app.mainloop()
